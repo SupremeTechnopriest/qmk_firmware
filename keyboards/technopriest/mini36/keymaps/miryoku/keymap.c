@@ -34,7 +34,7 @@
 
 #define Q_J       RSFT_T(KC_J)
 #define Q_K       RCTL_T(KC_K)
-#define Q_L       RALT_T(KC_K)
+#define Q_L       RALT_T(KC_L)
 #define Q_QUOT    RGUI_T(KC_QUOT)
 
 // HALMAK Mod Taps
