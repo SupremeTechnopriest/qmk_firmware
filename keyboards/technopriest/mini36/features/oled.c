@@ -85,11 +85,11 @@ void render_default_layer (int x, int y) {
   oled_set_cursor(x, y);
 
   switch (get_highest_layer(default_layer_state)) {
-    case _QWERTY:
-      oled_write("QWRTY", false);
-      break;
     case _HALMAK:
       oled_write("HALMK ", false);
+      break;
+    case _QWERTY:
+      oled_write("QWRTY", false);
       break;
     default:
       oled_write("UNDEF", false);

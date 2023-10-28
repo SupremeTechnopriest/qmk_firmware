@@ -85,12 +85,28 @@ tap_dance_action_t tap_dance_actions[] = {
 
 #define TD_BOOT     TD(TD_QK_BOOT)
 
-//
-// QWERTY
-//
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  //
+  // HALMAK
+  //
+
   [0] = LAYOUT_split_3x5_3(
+    //,--------------------------------------------.                    ,--------------------------------------------.
+           KC_W,    KC_L,    KC_R,    KC_B,    KC_Z,                      KC_QUOT,    KC_Q,    KC_U,    KC_D,    KC_J,
+    //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+            H_S,     H_H,     H_N,     H_T, KC_COMM,                       KC_DOT,     H_A,     H_E,     H_O,     H_I,
+    //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
+            H_F,    KC_M,    KC_V,    KC_C, KC_SLSH,                         KC_G,    KC_P,    KC_X,    KC_K,     H_Y,
+    //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+                                  MEDIA,   NAV,     MOUSE,           SYM,     NUM,    FUN
+                               //`--------------------------'  `--------------------------'
+  ),
+
+  //
+  // QWERTY
+  //
+  [1] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
          KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -101,22 +117,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 MEDIA,   NAV,     MOUSE,           SYM,     NUM,    FUN
                             //`--------------------------'  `--------------------------'
 
-  ),
-
-  //
-  // HALMAK
-  //
-
-  [1] = LAYOUT_split_3x5_3(
-  //,--------------------------------------------.                    ,--------------------------------------------.
-         KC_W,    KC_L,    KC_R,    KC_B,    KC_Z,                      KC_QUOT,    KC_Q,    KC_U,    KC_D,    KC_J,
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-          H_S,     H_H,     H_N,     H_T, KC_COMM,                       KC_DOT,     H_A,     H_E,     H_O,     H_I,
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-          H_F,    KC_M,    KC_V,    KC_C, KC_SLSH,                         KC_G,    KC_P,    KC_X,    KC_K,     H_Y,
-  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                MEDIA,   NAV,     MOUSE,           SYM,     NUM,    FUN
-                            //`--------------------------'  `--------------------------'
   ),
 
   //
@@ -202,7 +202,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //
   // SYMBOL
   //
-
   [7] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
       KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,                        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
@@ -274,5 +273,32 @@ bool achordion_chord(
   uint16_t other_keycode,
   keyrecord_t* other_record
 ) {
+  switch (tap_hold_keycode) {
+    case Q_A:
+    case Q_S:
+    case Q_D:
+    case Q_F:
+    case H_S:
+    case H_H:
+    case H_N:
+    case H_T:
+      if (other_keycode == MEDIA) { return true; }
+      if (other_keycode == NAV) { return true; }
+      if (other_keycode == MOUSE) { return true; }
+      break;
+    case Q_J:
+    case Q_K:
+    case Q_L:
+    case Q_QUOT:
+    case H_A:
+    case H_E:
+    case H_O:
+    case H_I:
+      if (other_keycode == SYM) { return true; }
+      if (other_keycode == NUM) { return true; }
+      if (other_keycode == FUN) { return true; }
+      break;
+  }
   return achordion_opposite_hands(tap_hold_record, other_record);
 }
+

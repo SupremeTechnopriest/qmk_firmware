@@ -1,7 +1,7 @@
 SRC += ./features/achordion.c
 SRC += ./features/oled.c
 SRC += ./features/luna.c
-SRC += ./features/overlay.c
+# SRC += ./features/overlay.c
 
 SERIAL_DRIVER = vendor
 
